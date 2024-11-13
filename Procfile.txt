@@ -1,2 +1,0 @@
-web: npm --prefix app/backend start # Para el back-end, si es Node.js
-static: npm --prefix app/frontend start # Para el front-end, si es React/Vue/etc.
