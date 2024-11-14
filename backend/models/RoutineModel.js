@@ -5,7 +5,7 @@ const routineSchema = new mongoose.Schema({
     //owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false },
     startDate: { type: Date, required: false },
     endDate: { type: Date, required: false },
-    //days: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Day' }] // Relación con el modelo Day
+    days: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Day' }] // Relación con el modelo Day
 });
 
 const Routine = mongoose.model('Routine', routineSchema);

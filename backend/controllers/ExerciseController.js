@@ -1,4 +1,5 @@
 const Exercise = require('../models/ExerciseModel');
+const Day = require('../models/DayModel')
 
 //CRUD
 const createExercise = async (req, res) => {
@@ -52,7 +53,7 @@ const deleteExercise = async (req, res) => {
 const addExerciseToDay = async (req, res) => {
     const { dayId, exerciseId } = req.body;
 
-    const day = await Exercise.findById(dayId);
+    const day = await Day.findById(dayId);
     day.exercises.push(exerciseId);
     await day.save();
 
