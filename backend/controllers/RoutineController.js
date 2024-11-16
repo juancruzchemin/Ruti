@@ -1,5 +1,3 @@
-//CRUD
-// controllers/RoutineController.js
 const mongoose = require('mongoose');
 const Routine = require('../models/RoutineModel');
 const jwt = require('jsonwebtoken'); // Para generar un token
@@ -29,7 +27,13 @@ const createRoutine = async (req, res) => {
 
 const getRoutine = async (req, res) => {
     try {
-        const routine = await Routine.findById(req.params.id);
+        const routine = await Routine.findById(req.params.id)
+            .populate({
+                path: 'days',
+                populate: {
+                    path: 'exercises'
+                }
+            });
         if (!routine) {
             return res.status(404).json({ message: 'Routine not found' });
         }
@@ -69,8 +73,4 @@ const addDayToRoutine = async (req, res) => {
     res.json(routine);
 };
 
-
-
 module.exports = { createRoutine, getRoutine, getAllRoutines, updateRoutine, deleteRoutine, addDayToRoutine };
-
-

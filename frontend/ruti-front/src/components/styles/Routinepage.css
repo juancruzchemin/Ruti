@@ -1,0 +1,99 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.date-container {
+  display: flex;
+  justify-content: space-around;
+  /* Distribuye el espacio entre las columnas */
+  align-items: flex-start;
+  /* Alinea los elementos verticalmente en la parte superior */
+}
+
+.date-column {
+  display: flex;
+  flex-direction: column;
+  /* Organiza los elementos en una columna */
+  align-items: center;
+  /* Alinea los elementos horizontalmente en el centro */
+}
+
+.label {
+  font-weight: bold;
+  /* Opcional: para resaltar el label */
+}
+
+.date {
+  margin-top: 4px;
+  /* Opcional: para agregar un pequeño espacio entre el label y la fecha */
+}
+
+.day-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background-color: #f9f9f9;
+}
+
+.day-title {
+  font-size: 1.2em;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.day-title button {
+  margin-left: 8px;
+  padding: 4px 8px;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+
+.exercise-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.exercise-item {
+  display: flex;
+  justify-content: space-around;
+  /* Distribuye el espacio entre los elementos */
+  align-items: center;
+  /* Alinea los elementos verticalmente en el centro */
+  margin-bottom: 8px;
+}
+
+.exercise-item p {
+  justify-content: space-around;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+}
