@@ -1,0 +1,13 @@
+/* src/components/Card.css o el archivo CSS que estés utilizando */
+.card-text {
+    display: flex;
+    justify-content: space-between; /* Distribuye el espacio entre las columnas */
+    align-items: flex-start; /* Alinea los elementos verticalmente en la parte superior */
+  }
+  
+  .date-column {
+    display: flex;
+    flex-direction: column; /* Organiza los elementos en una columna */
+    align-items: flex-start; /* Alinea los elementos horizontalmente a la izquierda */
+  }
+  

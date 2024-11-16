@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
+import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/RoutineCard.css'
 
 const Section = () => {
     const [routines, setRoutines] = useState([]);
@@ -29,20 +31,31 @@ const Section = () => {
     return (
         <div className="container my-4">
             <h2>Routines</h2>
-            <Carousel data-bs-theme="dark" interval={null}>
+            <Carousel data-bs-theme="dark" interval={null} indicators={false}>
                 {routineChunks.map((chunk, index) => (
                     <Carousel.Item key={index}>
                         <div className="d-flex justify-content-center">
                             {chunk.map((routine) => (
-                                <div key={routine._id} className="card mx-2" style={{ width: '18rem' }}>
-                                    <div className="card-body">
-                                        <h5 className="card-title">{routine.name}</h5>
-                                        <p className="card-text">Start Date: {routine.startDate}</p>
-                                        <p className="card-text">End Date: {routine.endDate}</p>
-                                        <a href={`/routines/${routine._id}`} className="btn btn-primary">
-                                            Ver detalles
-                                        </a>
-                                    </div>
+                                <div key={routine._id} className="card mx-2" style={{ width: '18rem', cursor: 'pointer' }}>
+                                    <Link to={`/routines/${routine._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                        <div className="card-body">
+                                            <div className='card-title'>
+                                                <h5 className="title">
+                                                    {routine.name}
+                                                </h5>
+                                            </div>
+                                            <div className="card-text">
+                                                <div className="date-column">
+                                                    <p className="label">Start Date:</p>
+                                                    <p className="date">{routine.startDate}</p>
+                                                </div>
+                                                <div className="date-column">
+                                                    <p className="label">End Date:</p>
+                                                    <p className="date">{routine.endDate}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Link>
                                 </div>
                             ))}
                         </div>

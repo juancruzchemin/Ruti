@@ -17,6 +17,7 @@ router.delete('/routines/:id', routineController.deleteRoutine);
 
 router.post('/routines/add-day', routineController.addDayToRoutine);
 router.post('/days/add-exercise', exerciseController.addExerciseToDay);
+router.post('/days/removeExerciseFromDay', exerciseController.removeExerciseFromDay);
 
 
 // // Importa el controlador o la función de la ruta

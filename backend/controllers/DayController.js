@@ -18,10 +18,10 @@ const createDay = async (req, res) => {
 
 const getAllDays = async (req, res) => {
     try {
-        const days = await Day.find(); // Devuelve todas las rutinas
-        res.status(200).json(days); // Devuelve las rutinas en formato JSON
+        const days = await Day.find().populate('exercises'); // Popula los ejercicios
+        res.status(200).json(days); // Devuelve los días en formato JSON
     } catch (err) {
-        res.status(500).json({ message: 'Error al obtener las rutinas', error: err });
+        res.status(500).json({ message: 'Error al obtener los días', error: err });
     }
 };
 
