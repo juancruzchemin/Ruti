@@ -1,0 +1,51 @@
+.day-card {
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.day-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.exercise-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.exercise-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr auto;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.exercise-item:last-child {
+  border-bottom: none;
+}
+
+.exercise-column {
+  padding: 0 8px;
+}
+
+.exercise-column p {
+  margin: 0;
+}
+
+.exercise-column input {
+  width: 100%;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+/* Estilo personalizado para ocultar el icono de flecha hacia abajo */
+.custom-dropdown-toggle::after {
+  display: none;
+}

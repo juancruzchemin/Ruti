@@ -1,0 +1,42 @@
+.carousel-container {
+  position: relative;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%; /* Ajusta el ancho del área de control */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mejor visibilidad */
+  border-radius: 50%; /* Hace que las flechas sean redondas */
+  padding: 10px; /* Añade padding alrededor de las flechas */
+}
+
+.carousel-control-prev {
+  left: -5%; /* Mueve la flecha izquierda hacia afuera */
+}
+
+.carousel-control-next {
+  right: -5%; /* Mueve la flecha derecha hacia afuera */
+}
+
+.newDay {
+  margin-bottom: 20px;
+}
+
+.card {
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}

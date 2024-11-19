@@ -40,9 +40,20 @@ const getExercise = async (req, res) => {
 };
 
 const updateExercise = async (req, res) => {
-    const exercise = await Exercise.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.json(exercise);
-};
+    try {
+      const exercise = await Exercise.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      if (!exercise) {
+        return res.status(404).json({ message: 'Exercise not found' });
+      }
+      res.json(exercise);
+    } catch (error) {
+      console.error('Error updating exercise:', error);
+      res.status(500).json({ message: 'Internal server error', error: error.message });
+    }
+  };
+  
+  module.exports = { updateExercise };
+  
 
 const deleteExercise = async (req, res) => {
     await Exercise.findByIdAndDelete(req.params.id);
@@ -81,27 +92,28 @@ const addExerciseToDay = async (req, res) => {
 // special actions
 const removeExerciseFromDay = async (req, res) => {
     const { dayId, exerciseId } = req.body;
-
+  
     try {
-        const day = await Day.findById(dayId);
-        if (!day) {
-            return res.status(404).json({ message: 'Day not found' });
-        }
-
-        // Filtra el array de ejercicios para eliminar el ejercicio con el ID especificado
-        day.exercises = day.exercises.filter(exercise => exercise.toString() !== exerciseId);
-
-        await day.save();
-
-        // Popula los ejercicios para devolver el objeto completo en la respuesta
-        await day.populate('exercises').execPopulate();
-
-        res.json(day);
+      const day = await Day.findById(dayId);
+      if (!day) {
+        return res.status(404).json({ message: 'Day not found' });
+      }
+  
+      // Filtra el array de ejercicios para eliminar el ejercicio con el ID especificado
+      day.exercises = day.exercises.filter(exercise => exercise.toString() !== exerciseId);
+  
+      await day.save();
+  
+      // Popula los ejercicios para devolver el objeto completo en la respuesta
+      await day.populate('exercises');
+  
+      res.json(day);
     } catch (error) {
-        console.error('Error removing exercise from day:', error);
-        res.status(500).json({ message: 'Internal server error' });
+      console.error('Error removing exercise from day:', error);
+      res.status(500).json({ message: 'Internal server error', error: error.message });
     }
-};
+  };
+
 
 
 module.exports = { createExercise, getAllExercises, getExercise, updateExercise, deleteExercise, addExerciseToDay, removeExerciseFromDay };

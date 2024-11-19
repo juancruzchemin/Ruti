@@ -1,0 +1,28 @@
+.exercise-card {
+    width: 18rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .exercise-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .exercise-card .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .exercise-card .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .exercise-card .card-text {
+    font-size: 1rem;
+    color: #ffffff;
+  }
+  

@@ -1,125 +1,244 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { format } from 'date-fns';
-import Modal from 'react-modal';
+import RoutineHeader from '../components/RoutineHeader';
+import DayRoutineCard from '../components/DayRoutineCard';
+import DayCarousel from '../components/DayCarousel';
+import RoutineModal from '../components/RoutineModal';
 import '../components/styles/Routinepage.css';
-
-Modal.setAppElement('#root'); // Asegúrate de que esto esté configurado correctamente
 
 function RoutineDetail() {
   const { id } = useParams();
   const [routine, setRoutine] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedDayId, setSelectedDayId] = useState(null);
+  const [isCreatingDay, setIsCreatingDay] = useState(false);
+  const [isCreatingExercise, setIsCreatingExercise] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [newDay, setNewDay] = useState({ name: '' });
+  const [newExercise, setNewExercise] = useState({ name: '', repetition: '', serie: '', weight: '' });
 
   useEffect(() => {
     // Llamada a la API para obtener la rutina por su ID
-    fetch(`http://localhost:3000/routines/${id}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        setRoutine(data);
-      })
-      .catch(error => console.error('Error:', error));
+    fetchRoutine();
   }, [id]);
 
-  const openModal = (dayId) => {
+  const fetchRoutine = async () => {
+    const response = await fetch(`http://localhost:3000/routines/${id}`);
+    const data = await response.json();
+    setRoutine(data);
+  };
+
+  const openModal = (dayId, isEdit = false, isExercise = false) => {
+    console.log('Opening modal for day ID:', dayId);
     setSelectedDayId(dayId);
     setModalIsOpen(true);
+    if (isEdit) {
+      const day = routine.days.find(day => day._id === dayId);
+      setNewDay({ name: day.name });
+      setIsEditing(true);
+    }
+    if (isExercise) {
+      setIsCreatingExercise(true);
+    }
   };
 
   const closeModal = () => {
+    console.log('Closing modal');
     setModalIsOpen(false);
     setSelectedDayId(null);
+    setIsCreatingDay(false);
+    setIsCreatingExercise(false);
+    setIsEditing(false);
+    setNewDay({ name: '' });
+    setNewExercise({ name: '', repetition: '', serie: '', weight: '' });
   };
 
-  const handleAddExercise = () => {
-    // Lógica para agregar un ejercicio
-    console.log(`Agregar ejercicio al día con ID: ${selectedDayId}`);
-    closeModal();
+  const handleAddExercise = (dayId) => {
+    console.log(`Agregar ejercicio al día con ID: ${dayId}`);
+    setSelectedDayId(dayId);
+    setIsCreatingExercise(true);
+    setModalIsOpen(true);
   };
 
-  const handleEditDayName = () => {
-    const newName = prompt('Ingrese el nuevo nombre del día:');
-    if (newName) {
-      // Lógica para editar el nombre del día
-      console.log(`Editar nombre del día con ID: ${selectedDayId} a ${newName}`);
-    }
-    closeModal();
+  const handleEditDayName = (dayId) => {
+    openModal(dayId, true);
   };
 
-  const handleDeleteDay = () => {
+  const handleDeleteDay = async (dayId) => {
     if (window.confirm('¿Está seguro de que desea eliminar este día?')) {
-      // Lógica para eliminar el día
-      console.log(`Eliminar día con ID: ${selectedDayId}`);
+      try {
+        // Llamada a la API para eliminar el día de la rutina
+        const response = await fetch('http://localhost:3000/routines/removeDayFromRoutine', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ routineId: id, dayId: dayId }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Error removing day from routine');
+        }
+
+        const updatedRoutine = await response.json();
+
+        // Actualizar el estado de la rutina
+        setRoutine(updatedRoutine);
+        closeModal();
+      } catch (error) {
+        console.error('Error removing day from routine:', error);
+        alert('Error removing day from routine');
+      }
     }
+  };
+
+  const handleSubmitNewDay = async (e) => {
+    e.preventDefault();
+    try {
+      // Llamada a la API para crear un nuevo día
+      const response = await fetch('http://localhost:3000/day', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newDay),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error creating new day');
+      }
+
+      const createdDay = await response.json();
+
+      // Llamada a la API para añadir el día a la rutina
+      const addDayResponse = await fetch('http://localhost:3000/routines/add-day', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ routineId: id, dayId: createdDay._id }),
+      });
+
+      if (!addDayResponse.ok) {
+        throw new Error('Error adding day to routine');
+      }
+
+      const updatedRoutine = await addDayResponse.json();
+
+      // Actualizar el estado de la rutina combinando los días existentes con el nuevo día
+      setRoutine(prevRoutine => ({
+        ...prevRoutine,
+        days: [...prevRoutine.days, createdDay],
+      }));
+
+      closeModal();
+    } catch (error) {
+      console.error('Error creating and adding new day:', error);
+      alert('Error creating and adding new day');
+    }
+  };
+
+
+  const handleSubmitNewExercise = async (e) => {
+    e.preventDefault();
+    // Llamada a la API para crear un nuevo ejercicio
+    const response = await fetch('http://localhost:3000/exercise', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newExercise),
+    });
+    const createdExercise = await response.json();
+
+    // Llamada a la API para añadir el ejercicio al día
+    const dayResponse = await fetch('http://localhost:3000/days/add-exercise', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ dayId: selectedDayId, exerciseId: createdExercise.exercise._id }),
+    });
+    const updatedDay = await dayResponse.json();
+
+    // Actualizar el estado de la rutina
+    setRoutine(prevRoutine => ({
+      ...prevRoutine,
+      days: prevRoutine.days.map(day => (day._id === selectedDayId ? updatedDay : day)),
+    }));
+
     closeModal();
+  };
+
+  const handleSubmitEditDay = async (e) => {
+    e.preventDefault();
+    // Llamada a la API para actualizar el día
+    const response = await fetch(`http://localhost:3000/days/${selectedDayId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newDay),
+    });
+    const updatedDay = await response.json();
+
+    // Actualizar el estado de la rutina
+    setRoutine(prevRoutine => ({
+      ...prevRoutine,
+      days: prevRoutine.days.map(day => (day._id === selectedDayId ? updatedDay : day)),
+    }));
+
+    closeModal();
+  };
+
+  const handleDayAdded = () => {
+    fetchRoutine();
+  };
+
+  const handleAddDay = () => {
+    setIsCreatingDay(true);
+    setModalIsOpen(true);
   };
 
   if (!routine) return <div>Cargando...</div>;
 
-  const formattedStartDate = format(new Date(routine.startDate), 'dd/MM/yyyy');
-  const formattedEndDate = format(new Date(routine.endDate), 'dd/MM/yyyy');
-
   return (
     <div className="container">
-      <div className="header">
-        <h1>{routine.name}</h1>
-        <div className="date-container">
-          <div className="date-column">
-            <p className="label">Start Date:</p>
-            <p className="date">{formattedStartDate}</p>
-          </div>
-          <div className="date-column">
-            <p className="label">End Date:</p>
-            <p className="date">{formattedEndDate}</p>
-          </div>
-        </div>
+      <div className="container">
+        <RoutineHeader routine={routine} />
+        <DayCarousel routineId={id} onDayAdded={handleDayAdded} onAddDay={handleAddDay} />
       </div>
       <div>
         {routine.days && routine.days.length > 0 ? (
           routine.days.map((day, index) => (
-            <div key={index} className="day-card">
-              <div className="day-title">
-                {day.name}
-                <button className='btn primary' onClick={() => openModal(day._id)}>⋮</button>
-              </div>
-              <ul className="exercise-list">
-                {day.exercises && day.exercises.length > 0 ? (
-                  day.exercises.map((exercise, exerciseIndex) => (
-                    <li key={exerciseIndex} className="exercise-item">
-                      <p>{exercise.name}</p>
-                      <p>{exercise.repetition} x {exercise.serie}</p>
-                      <p>{exercise.weight} Kg</p>
-                    </li>
-                  ))
-                ) : (
-                  <li className="exercise-item">No exercises</li>
-                )}
-              </ul>
-            </div>
+            <DayRoutineCard
+              key={index}
+              day={day}
+              onAddExercise={handleAddExercise}
+              onEditDay={handleEditDayName}
+              onDeleteDay={handleDeleteDay}
+            />
           ))
         ) : (
           <p>No days available</p>
         )}
       </div>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Opciones del Día"
-        className="modal"
-        overlayClassName="overlay"
-      >
-        <h2>Opciones del Día</h2>
-        <button onClick={handleEditDayName}>Editar Nombre</button>
-        <button onClick={handleDeleteDay}>Eliminar Día</button>
-        <button onClick={handleAddExercise}>Agregar Ejercicio</button>
-        <button onClick={closeModal}>Cerrar</button>
-      </Modal>
+      <RoutineModal
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+        isCreatingDay={isCreatingDay}
+        isCreatingExercise={isCreatingExercise}
+        isEditing={isEditing}
+        newDay={newDay}
+        newExercise={newExercise}
+        selectedDayId={selectedDayId}
+        handleSubmitNewDay={handleSubmitNewDay}
+        handleSubmitNewExercise={handleSubmitNewExercise}
+        handleSubmitEditDay={handleSubmitEditDay}
+        fetchRoutine={fetchRoutine}
+        setNewDay={setNewDay}
+        setNewExercise={setNewExercise}
+      />
     </div>
   );
 }

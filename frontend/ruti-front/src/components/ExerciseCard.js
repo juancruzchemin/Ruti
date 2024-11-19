@@ -34,6 +34,7 @@ const ExerciseCard = () => {
 
     const exerciseChunks = exercises.reduce(reduceExercises, []);
 
+
     return (
         <div className="container my-4">
             <h2>Exercises</h2>
@@ -60,7 +61,7 @@ const ExerciseCard = () => {
                                                     <p className="date">{exercise.serie}</p>
                                                 </div>
                                                 <div className="date-column">
-                                                    <p className="label">Serie:</p>
+                                                    <p className="label">Weight:</p>
                                                     <p className="date">{exercise.weight}</p>
                                                 </div>
                                             </div>

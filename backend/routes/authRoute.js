@@ -16,6 +16,8 @@ router.delete('/routines/:id', routineController.deleteRoutine);
 
 
 router.post('/routines/add-day', routineController.addDayToRoutine);
+router.post('/routines/removeDayFromRoutine', routineController.removeDayFromRoutine);
+
 router.post('/days/add-exercise', exerciseController.addExerciseToDay);
 router.post('/days/removeExerciseFromDay', exerciseController.removeExerciseFromDay);
 
