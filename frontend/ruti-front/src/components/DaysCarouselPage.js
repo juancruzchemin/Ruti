@@ -3,9 +3,10 @@ import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles/DayCard.css'
+import './styles/DayCard.css';
+import { Button } from 'react-bootstrap';
 
-const DayCard = () => {
+const DayCard = ({ onAddDayClick }) => {
     const [days, setDays] = useState([]);
 
     useEffect(() => {
@@ -34,39 +35,40 @@ const DayCard = () => {
 
     const exerciseChunks = days.reduce(reduceExercises, []);
 
+    // Añadir el botón "Agregar Día" al final del último chunk
+    if (exerciseChunks.length > 0) {
+        exerciseChunks[exerciseChunks.length - 1].push({ isAddButton: true });
+    } else {
+        exerciseChunks.push([{ isAddButton: true }]);
+    }
+
     return (
-        <div className="container my-4">
-            <h2>Days</h2>
+        <div className="my-4">
+            <h2>All days</h2>
             <Carousel interval={null} indicators={false}>
                 {exerciseChunks.map((chunk, index) => (
                     <Carousel.Item key={index}>
                         <div className="d-flex justify-content-center">
                             {chunk.map((day, idx) => (
-                                <div key={day._id} className="card mx-2" style={{ width: '18rem', cursor: 'pointer' }}>
-                                    <Link to={`/days/${day._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                        <div className="content-container">
-                                            <h1 className='title'>{day.name}</h1>
-                                            <div className="date-container">
-                                                <div className="date-column">
-                                                    <p className="label">Exercises:</p>
-                                                    {day.exercises && day.exercises.length > 0 ? (
-                                                        day.exercises.map((exercise, exerciseIdx) => (
-                                                            <p key={exerciseIdx} >{exercise.name}</p>
-                                                        ))
-                                                    ) : (
-                                                        <p className="date">No exercises</p>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </div>                                              
-                                    </Link>
-                                </div>
+                                day.isAddButton ? (
+                                    <Button key={idx} onClick={onAddDayClick} className="mx-2" style={{ width: '18rem' }}>
+                                        Agregar Día
+                                    </Button>
+                                ) : (
+                                    <div key={day._id} className="card mx-2" style={{ width: '18rem', cursor: 'pointer' }}>
+                                        <Link to={`/days/${day._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                            <div className="content-container">
+                                                <h1 className='title'>{day.name}</h1>
+                                            </div>                                              
+                                        </Link>
+                                    </div>
+                                )
                             ))}
                         </div>
                     </Carousel.Item>
                 ))}
             </Carousel>
-        </div >
+        </div>
     );
 };
 

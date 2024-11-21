@@ -38,20 +38,16 @@ const ExerciseCard = () => {
     return (
         <div className="container my-4">
             <h2>Exercises</h2>
-            <Carousel data-bs-theme="dark" interval={null} indicators={false}>
+            <Carousel interval={null} indicators={false}>
                 {exerciseChunks.map((chunk, index) => (
                     <Carousel.Item key={index}>
                         <div className="d-flex justify-content-center">
                             {chunk.map((exercise, idx) => (
                                 <div key={exercise._id} className="card mx-2" style={{ width: '18rem', cursor: 'pointer' }}>
                                     <Link to={`/exercises/${exercise._id}`} key={exercise._id} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                        <div className="card-body">
-                                            <div className='card-title'>
-                                                <h5 className="title">
-                                                    {exercise.name}
-                                                </h5>
-                                            </div>
-                                            <div className="card-text">
+                                        <div className="content-container">
+                                            <h1 className='title'>{exercise.name}</h1>
+                                            <div className="date-container">
                                                 <div className="date-column">
                                                     <p className="label">Repetition:</p>
                                                     <p className="date">{exercise.repetition}</p>
