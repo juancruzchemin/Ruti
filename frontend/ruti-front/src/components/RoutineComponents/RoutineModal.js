@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import ExerciseCarousel from '../components/ExerciseCarousel'; // Importa el componente ExerciseCarousel
-import './styles/RoutineModal.css'; // Importa el archivo CSS
+import ExerciseCarousel from '../ExerciseComponents/ExerciseCarousel'; // Importa el componente ExerciseCarousel
+import '../styles/RoutineStyles/RoutineModal.css'
 
 function RoutineModal({
   modalIsOpen,

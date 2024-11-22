@@ -1,13 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { Dropdown, Modal, Button, Form } from 'react-bootstrap';
-import ExerciseCarousel from '../components/AllExercisesCarousel';
-import '../components/styles/ExercisePage.css';
+import ExerciseCarousel from '../components/ExerciseComponents/AllExercisesCarousel';
+import '../components/styles/ExerciseStyles/ExercisePage.css';
 
 function ExerciseDetails() {
   const { id } = useParams();
   const [selectedExercise, setSelectedExercise] = useState(null);
-  const [editingField, setEditingField] = useState(null);
   const [editedValues, setEditedValues] = useState({});
   const [showAddExerciseModal, setShowAddExerciseModal] = useState(false);
   const [newExercise, setNewExercise] = useState({ name: '', repetition: '', serie: '', weight: '' });

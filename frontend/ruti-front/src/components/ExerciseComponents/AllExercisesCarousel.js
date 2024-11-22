@@ -4,7 +4,7 @@ import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles/ExercisePage.css';
+import '../styles/ExerciseStyles/ExercisePage.css';
 
 const ExerciseCarousel = ({ onExerciseClick, onAddExerciseClick }) => {
   const [exercises, setExercises] = useState([]);

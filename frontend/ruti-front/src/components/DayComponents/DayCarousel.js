@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Carousel, Button } from 'react-bootstrap';
-import './styles/DayCarousel.css'; // Importar el archivo CSS si es necesario
+import { Carousel } from 'react-bootstrap';
+import '../styles/DayStyles/DayCarousel.css'; // Importar el archivo CSS si es necesario
 
 function DayCarousel({ routineId, onDayAdded, onAddDay }) {
   const [days, setDays] = useState([]);

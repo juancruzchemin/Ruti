@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Dropdown, Modal, Button, Form } from 'react-bootstrap';
 import { FaTrash } from 'react-icons/fa';
-import '../components/styles/Daypage.css';
-import DaysCarouselPage from '../components/DaysCarouselPage';
-import ExerciseCarousel from '../components/ExerciseCarousel';
+import '../components/styles/DayStyles/Daypage.css';
+import DaysCarouselPage from '../components/DayComponents/DaysCarouselPage';
+import ExerciseCarousel from '../components/ExerciseComponents/ExerciseCarousel';
 
 function DayDetail() {
   const { id } = useParams();
@@ -304,7 +304,7 @@ function DayDetail() {
           exercises.map((exercise, exerciseIndex) => (
             <li key={exerciseIndex} className="exercise-item">
               <div className="exercise-column">
-                {editingExercise && editingExercise.exerciseId === exercise._id && editingExercise.field === 'name' ? (
+                {exercise && editingExercise && editingExercise.exerciseId === exercise._id && editingExercise.field === 'name' ? (
                   <input
                     type="text"
                     value={editedValues.name}
@@ -314,11 +314,11 @@ function DayDetail() {
                     autoFocus
                   />
                 ) : (
-                  <h1 onDoubleClick={() => handleDoubleClick(exercise, 'name')}>{exercise.name}</h1>
+                  <h1 onDoubleClick={() => handleDoubleClick(exercise, 'name')}>{exercise?.name}</h1>
                 )}
               </div>
               <div className="exercise-column">
-                {editingExercise && editingExercise.exerciseId === exercise._id && editingExercise.field === 'repetition' ? (
+                {exercise && editingExercise && editingExercise.exerciseId === exercise._id && editingExercise.field === 'repetition' ? (
                   <input
                     type="number"
                     value={editedValues.repetition}
@@ -328,11 +328,11 @@ function DayDetail() {
                     autoFocus
                   />
                 ) : (
-                  <h1 onDoubleClick={() => handleDoubleClick(exercise, 'repetition')}>{exercise.repetition}</h1>
+                  <h1 onDoubleClick={() => handleDoubleClick(exercise, 'repetition')}>{exercise?.repetition}</h1>
                 )}
               </div>
               <div className="exercise-column">
-                {editingExercise && editingExercise.exerciseId === exercise._id && editingExercise.field === 'serie' ? (
+                {exercise && editingExercise && editingExercise.exerciseId === exercise._id && editingExercise.field === 'serie' ? (
                   <input
                     type="number"
                     value={editedValues.serie}
@@ -342,11 +342,11 @@ function DayDetail() {
                     autoFocus
                   />
                 ) : (
-                  <h1 onDoubleClick={() => handleDoubleClick(exercise, 'serie')}>{exercise.serie}</h1>
+                  <h1 onDoubleClick={() => handleDoubleClick(exercise, 'serie')}>{exercise?.serie}</h1>
                 )}
               </div>
               <div className="exercise-column">
-                {editingExercise && editingExercise.exerciseId === exercise._id && editingExercise.field === 'weight' ? (
+                {exercise && editingExercise && editingExercise.exerciseId === exercise._id && editingExercise.field === 'weight' ? (
                   <input
                     type="number"
                     value={editedValues.weight}
@@ -356,7 +356,7 @@ function DayDetail() {
                     autoFocus
                   />
                 ) : (
-                  <h1 onDoubleClick={() => handleDoubleClick(exercise, 'weight')}>{exercise.weight}</h1>
+                  <h1 onDoubleClick={() => handleDoubleClick(exercise, 'weight')}>{exercise?.weight}</h1>
                 )}
               </div>
               <div className="exercise-column">

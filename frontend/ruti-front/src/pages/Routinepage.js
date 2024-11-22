@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import RoutineHeader from '../components/RoutineHeader';
-import DayRoutineCard from '../components/DayRoutineCard';
-import DayCarousel from '../components/DayCarousel';
-import RoutineModal from '../components/RoutineModal';
-import '../components/styles/Routinepage.css';
+import RoutineHeader from '../components/RoutineComponents/RoutineHeader';
+import DayRoutineCard from '../components/DayComponents/DayRoutineCard';
+import DayCarousel from '../components/DayComponents/DayCarousel';
+import RoutineModal from '../components/RoutineComponents/RoutineModal';
+import '../components/styles/RoutineStyles/Routinepage.css';
 
 function RoutineDetail() {
   const { id } = useParams();
@@ -16,17 +16,17 @@ function RoutineDetail() {
   const [isEditing, setIsEditing] = useState(false);
   const [newDay, setNewDay] = useState({ name: '' });
   const [newExercise, setNewExercise] = useState({ name: '', repetition: '', serie: '', weight: '' });
-
-  useEffect(() => {
-    // Llamada a la API para obtener la rutina por su ID
-    fetchRoutine();
-  }, [id]);
-
+  
   const fetchRoutine = async () => {
     const response = await fetch(`http://localhost:3000/routines/${id}`);
     const data = await response.json();
     setRoutine(data);
   };
+
+  useEffect(() => {
+    // Llamada a la API para obtener la rutina por su ID
+    fetchRoutine();
+  }, [id]);
 
   const openModal = (dayId, isEdit = false, isExercise = false) => {
     console.log('Opening modal for day ID:', dayId);

@@ -1,8 +1,8 @@
 // src/pages/HomePage.js
 import React from 'react';
-import RoutineCard from '../components/RoutineCard';
-import ExerciseCard from '../components/ExerciseCard';
-import DayCard from '../components/DayCard';
+import RoutineCard from '../components/RoutineComponents/RoutineCard';
+import ExerciseCard from '../components/ExerciseComponents/ExerciseCard';
+import DayCard from '../components/DayComponents/DayCard';
 
 
 function HomePage() {

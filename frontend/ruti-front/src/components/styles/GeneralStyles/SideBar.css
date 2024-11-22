@@ -1,0 +1,75 @@
+/* src/components/Sidebar.css */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -250px; /* Cambia left a right */
+    width: 250px;
+    height: 100%;
+    background-color: #0a2f54;
+    color: #ffffff;
+    transition: right 0.3s ease; /* Cambia left a right */
+    z-index: 1100; /* Asegúrate de que el sidebar esté por encima del header */
+  }
+  
+  .sidebar.open {
+    right: 0; /* Cambia left a right */
+  }
+  
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #0f4a84;
+  }
+  
+  .sidebar-header h3 {
+    margin: 0;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar-menu li {
+    padding: 1rem;
+  }
+  
+  .sidebar-menu li a {
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+  
+  .sidebar-menu li a:hover {
+    background-color: #495057;
+  }
+  
+  .sidebar-menu li a svg {
+    margin-right: 0.5rem;
+  }
+  
+  .sidebar-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem; /* Cambia left a right */
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1200; /* Asegúrate de que el botón esté por encima del sidebar */
+  }
+  

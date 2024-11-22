@@ -40,3 +40,7 @@
   align-items: center;
   height: 100%;
 }
+
+.card-title{
+  color: rgb(63, 61, 61);
+}

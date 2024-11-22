@@ -1,0 +1,50 @@
+/* src/components/Footer.css */
+
+.footer {
+    background-color: #4c9ced;
+    color: #ffffff;
+    padding: 1.5rem 0;
+    width: 100%;
+    bottom: 0;
+}
+
+.footer-column {
+    margin-bottom: 1rem;
+}
+
+.title {
+    color: #4c9ced;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1rem; /* Añade un espacio de 1rem entre cada enlace */
+    list-style: none; /* Elimina los puntos de la lista */
+    padding: 0; /* Elimina el padding por defecto */
+    margin: 0; /* Elimina el margen por defecto */
+  }
+  
+  .footer-links a {
+    color: #4c9ced;
+    text-decoration: none;
+    white-space: nowrap; /* Evita que el texto se envuelva en varias líneas */
+  }
+  
+  .footer-links a:hover {
+    text-decoration: underline;
+  }
+
+
+.footer-social a {
+    color: #4c9ced;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+.footer-social a:hover {
+    color: black;
+}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { FaTrash } from 'react-icons/fa'; // Importar el icono de eliminación
-import './styles/DayRoutineCard.css'; // Importar el archivo CSS
+import '../styles/DayStyles/DayRoutineCard.css'; // Importar el archivo CSS
 
 function DayCard({ day, onAddExercise, onEditDay, onDeleteDay }) {
   const [editingExercise, setEditingExercise] = useState(null);

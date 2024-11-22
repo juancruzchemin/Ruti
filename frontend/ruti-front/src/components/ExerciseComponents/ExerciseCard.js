@@ -3,7 +3,7 @@ import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles/ExerciseCard.css'
+import '../styles/ExerciseStyles/ExerciseCard.css'
 
 const ExerciseCard = () => {
     const [exercises, setExercises] = useState([]);

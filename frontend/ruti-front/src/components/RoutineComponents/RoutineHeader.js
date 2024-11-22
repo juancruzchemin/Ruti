@@ -1,6 +1,6 @@
 import React from 'react';
 import { format } from 'date-fns';
-import './styles/RoutineHeader.css'; // Importar el archivo CSS
+import '../styles/RoutineStyles/RoutineHeader.css'; // Importar el archivo CSS
 
 function RoutineHeader({ routine, onAddDay }) {
   const formattedStartDate = routine.startDate ? format(new Date(routine.startDate), 'dd/MM/yyyy') : 'Fecha no disponible';

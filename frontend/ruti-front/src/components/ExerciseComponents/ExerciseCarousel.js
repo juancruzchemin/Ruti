@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Carousel, Button } from 'react-bootstrap';
-import './styles/ExerciseCarousel.css'; // Importar el archivo CSS
+import { Carousel } from 'react-bootstrap';
+import '../styles/ExerciseStyles/ExerciseCarousel.css'; // Importar el archivo CSS
 
 function ExerciseCarousel({ dayId, onExerciseAdded }) {
   const [exercises, setExercises] = useState([]);

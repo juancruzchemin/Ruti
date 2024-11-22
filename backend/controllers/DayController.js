@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Day = require('../models/DayModel');
+const Routine = require('../models/RoutineModel');
 
 //CRUD
 const createDay = async (req, res) => {
@@ -36,9 +37,29 @@ const updateDay = async (req, res) => {
 };
 
 const deleteDay = async (req, res) => {
-    await Day.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Day deleted' });
-};
+    const { dayId } = req.params;
+  
+    try {
+      // Eliminar el día de la colección de días
+      const deletedDay = await Day.findByIdAndDelete(dayId);
+  
+      if (!deletedDay) {
+        return res.status(404).json({ message: 'Day not found' });
+      }
+  
+      // Eliminar el día de todas las rutinas que lo contienen
+      await Routine.updateMany(
+        { days: dayId },
+        { $pull: { days: dayId } }
+      );
+  
+      res.status(200).json({ message: 'Day deleted successfully' });
+    } catch (error) {
+      console.error('Error deleting day:', error);
+      res.status(500).json({ message: 'Error deleting day' });
+    }
+  };
+  
 
 
 module.exports = { createDay, getAllDays, getDay, updateDay, deleteDay };

@@ -55,10 +55,29 @@ const updateExercise = async (req, res) => {
   module.exports = { updateExercise };
   
 
-const deleteExercise = async (req, res) => {
-    await Exercise.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Exercise deleted' });
-};
+  const deleteExercise = async (req, res) => {
+    const { exerciseId } = req.params;
+  
+    try {
+      // Eliminar el ejercicio de la colección de ejercicios
+      const deletedExercise = await Exercise.findByIdAndDelete(exerciseId);
+  
+      if (!deletedExercise) {
+        return res.status(404).json({ message: 'Exercise not found' });
+      }
+  
+      // Eliminar el ejercicio de todos los días que lo contienen
+      await Day.updateMany(
+        { exercises: exerciseId },
+        { $pull: { exercises: exerciseId } }
+      );
+  
+      res.status(200).json({ message: 'Exercise deleted successfully' });
+    } catch (error) {
+      console.error('Error deleting exercise:', error);
+      res.status(500).json({ message: 'Error deleting exercise' });
+    }
+  };
 
 // special actions
 const addExerciseToDay = async (req, res) => {
