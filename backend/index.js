@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const passport = require('passport');
+const path = require('path'); // Importa el módulo path
 const routineRoutes = require('./routes/authRoute');
 const dayRoutes = require('./routes/DayRoute');
 const exerciseRoutes = require('./routes/ExerciseRoute');
@@ -44,6 +45,14 @@ app.use(exerciseRoutes);
 // // Incluir rutas de autenticación
 // const authRoutes = require('./routes/authRoute');
 // app.use(authRoutes);
+
+// Sirve los archivos estáticos del frontend
+app.use(express.static(path.join(__dirname, './frontend')));
+
+// Maneja todas las rutas no específicas y redirige al index.html del frontend
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './frontend', 'index.html'));
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor corriendo en puerto ${PORT}`));
