@@ -2,7 +2,7 @@
   "name": "ruti",
   "version": "1.0.0",
   "scripts": {
-    "start": "node backend/server.js",
+    "start": "node backend/index.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend/ruti-front && npm run build --prefix frontend/ruti-front"
   }
 }
