@@ -46,12 +46,12 @@ app.use(exerciseRoutes);
 // const authRoutes = require('./routes/authRoute');
 // app.use(authRoutes);
 
-// Sirve los archivos estáticos del frontend
-app.use(express.static(path.join(__dirname, './ruti-front/')));
+// Configura la carpeta de archivos estáticos
+app.use(express.static(path.join(__dirname, 'ruti-front')));
 
-// Maneja todas las rutas no específicas y redirige al index.html del frontend
+// Ruta para servir el archivo index.html
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './ruti-front/', 'index.html'));
+  res.sendFile(path.join(__dirname, 'ruti-front', 'public/index.html'));
 });
 
 const PORT = process.env.PORT || 3000;
