@@ -50,7 +50,7 @@ app.use(exerciseRoutes);
 // app.use(authRoutes);
 
 // Sirve los archivos estáticos del frontend
-app.use(express.static(path.join(__dirname, '../frontend/ruti-front/public')));
+app.use(express.static(path.join(__dirname, '../frontend/ruti-front/build')));
 
 // Maneja todas las rutas no específicas y redirige al index.html del frontend
 app.get('*', (req, res) => {
