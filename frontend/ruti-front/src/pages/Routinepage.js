@@ -16,7 +16,7 @@ function RoutineDetail() {
   const [isEditing, setIsEditing] = useState(false);
   const [newDay, setNewDay] = useState({ name: '' });
   const [newExercise, setNewExercise] = useState({ name: '', repetition: '', serie: '', weight: '' });
-  
+
   const fetchRoutine = async () => {
     const response = await fetch(`http://localhost:3000/routines/${id}`);
     const data = await response.json();
@@ -138,7 +138,6 @@ function RoutineDetail() {
     }
   };
 
-
   const handleSubmitNewExercise = async (e) => {
     e.preventDefault();
     // Llamada a la API para crear un nuevo ejercicio
@@ -200,12 +199,31 @@ function RoutineDetail() {
     setModalIsOpen(true);
   };
 
+  const onAddDay = () => {
+    handleAddDay();
+  };
+
+  const onEditRoutine = (routineId) => {
+    // Implementa la lógica para editar la rutina
+    console.log(`Editar rutina con ID: ${routineId}`);
+  };
+
+  const onDeleteRoutine = (routineId) => {
+    // Implementa la lógica para eliminar la rutina
+    console.log(`Eliminar rutina con ID: ${routineId}`);
+  };
+
   if (!routine) return <div>Cargando...</div>;
 
   return (
     <div className="container">
       <div className="container">
-        <RoutineHeader routine={routine} />
+        <RoutineHeader
+          routine={routine}
+          onAddDay={onAddDay}
+          onEditRoutine={() => onEditRoutine(routine._id)}
+          onDeleteRoutine={() => onDeleteRoutine(routine._id)}
+        />
         <DayCarousel routineId={id} onDayAdded={handleDayAdded} onAddDay={handleAddDay} />
       </div>
       <div>

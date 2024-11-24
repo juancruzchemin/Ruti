@@ -34,6 +34,20 @@ const Section = () => {
 
     const routineChunks = routines.reduce(reduceRoutines, []);
 
+    // Función para crear una nueva rutina
+    const handleAddRoutine = async () => {
+        try {
+            const response = await axios.post('http://localhost:3000/routine', {
+                name: 'New Routine',
+                startDate: new Date(),
+                endDate: new Date()
+            });
+            setRoutines([...routines, response.data]);
+        } catch (error) {
+            console.error("Error creating routine:", error);
+        }
+    };
+
     return (
         <div className="container my-4">
             <h2>Routines</h2>
@@ -67,6 +81,21 @@ const Section = () => {
                         </div>
                     </Carousel.Item>
                 ))}
+                {/* Agregar la carta para crear una nueva rutina como último ítem del carrusel */}
+                <Carousel.Item>
+                    <div className="d-flex justify-content-center">
+                        <div className="card mx-2" style={{ width: '18rem', cursor: 'pointer' }} onClick={handleAddRoutine}>
+                            <div className="content-container">
+                                <h1 className='title'>Agregar Rutina</h1>
+                                <div className="date-container">
+                                    <div className="date-column">
+                                        <p className="label">Click para agregar</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Carousel.Item>
             </Carousel>
         </div>
     );
