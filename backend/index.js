@@ -17,7 +17,9 @@ app.use(express.json());
 
 // URL de conexión (puede ser 'mongodb://localhost:27017' para local)
 // Conexión a MongoDB
-mongoose.connect('mongodb://localhost:27017/Ruti', {
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/mydatabase';
+//'mongodb://localhost:27017/Ruti'
+mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
