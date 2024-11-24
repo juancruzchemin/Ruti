@@ -47,11 +47,11 @@ app.use(exerciseRoutes);
 // app.use(authRoutes);
 
 // Sirve los archivos estáticos del frontend
-app.use(express.static(path.join(__dirname, '../frontend/ruti-front')));
+app.use(express.static(path.join(__dirname, '../frontend/ruti-front/public')));
 
 // Maneja todas las rutas no específicas y redirige al index.html del frontend
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/ruti-front', 'index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/ruti-front/public', 'index.html'));
 });
 
 const PORT = process.env.PORT || 3000;
