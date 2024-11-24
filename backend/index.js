@@ -17,10 +17,7 @@ app.use(express.json());
 
 // URL de conexión (puede ser 'mongodb://localhost:27017' para local)
 // Conexión a MongoDB
-const MONGODB_URI = "mongodb+srv://juancruzcheminv:<db_password>@cluster0.zqlk4.mongodb.net/"
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/Ruti';
-
-mongoose.connect(mongoUri, {
+mongoose.connect('mongodb://localhost:27017/Ruti', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
