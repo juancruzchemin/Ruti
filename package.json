@@ -1,8 +1,17 @@
 {
   "name": "ruti",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
     "start": "node backend/index.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend/ruti-front && npm run build --prefix frontend/ruti-front"
+    "heroku-postbuild": "cd frontend/ruti-front && npm install && npm run build"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.13.8",
+    "path": "^0.12.7"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }
