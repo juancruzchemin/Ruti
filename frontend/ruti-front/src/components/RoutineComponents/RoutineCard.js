@@ -12,7 +12,12 @@ const Section = () => {
     useEffect(() => {
         const fetchRoutines = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/routines');
+                const token = localStorage.getItem('token');
+                const response = await axios.get('http://localhost:3000/routines', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
                 setRoutines(response.data);
             } catch (error) {
                 console.error("Error fetching routines:", error);
@@ -37,10 +42,15 @@ const Section = () => {
     // Función para crear una nueva rutina
     const handleAddRoutine = async () => {
         try {
+            const token = localStorage.getItem('token');
             const response = await axios.post('http://localhost:3000/routine', {
                 name: 'New Routine',
                 startDate: new Date(),
                 endDate: new Date()
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             });
             setRoutines([...routines, response.data]);
         } catch (error) {
@@ -56,8 +66,8 @@ const Section = () => {
                     <Carousel.Item key={index}>
                         <div className="d-flex justify-content-center">
                             {chunk.map((routine) => {
-                                const formattedStartDate = format(new Date(routine.startDate), 'dd/MM/yyyy');
-                                const formattedEndDate = format(new Date(routine.endDate), 'dd/MM/yyyy');
+                                const formattedStartDate = routine.startDate ? format(new Date(routine.startDate), 'dd/MM/yyyy') : 'Fecha no válida';
+                                const formattedEndDate = routine.endDate ? format(new Date(routine.endDate), 'dd/MM/yyyy') : 'Fecha no válida';
                                 return (
                                     <div key={routine._id} className="card mx-2" style={{ width: '18rem', cursor: 'pointer' }}>
                                         <Link to={`/routines/${routine._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>

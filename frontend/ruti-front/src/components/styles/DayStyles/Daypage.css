@@ -18,12 +18,17 @@ h1 {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  position: relative; /* Asegura que el dropdown se posicione correctamente */
+  background-color: #f8f9fa; /* Color de fondo para la tarjeta */
+  padding: 15px; /* Espaciado interno */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para la tarjeta */
 }
 
 .custom-dropdown-toggle {
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 1.5rem;
   cursor: pointer;
 }
 

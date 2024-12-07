@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaBars, FaHome, FaInfoCircle, FaUser, FaDumbbell } from 'react-icons/fa';
 import '../styles/GeneralStyles/SideBar.css'; // Importa el archivo de estilos
+import LogoutButton from './LogoutButton'; // Asegúrate de que la ruta sea correcta
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,6 +41,9 @@ const Sidebar = () => {
             <Link to="/about" onClick={toggleSidebar}>
               <FaInfoCircle /> Acerca de
             </Link>
+          </li>  
+          <li>
+              <LogoutButton />
           </li>  
         </ul>
       </div>

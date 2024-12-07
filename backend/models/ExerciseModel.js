@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
 const exerciseSchema = new mongoose.Schema({
-    name: String,
-    repetition: Number,
-    serie: Number,
-    weight: Number,
-    // exerciseAssocied: { type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' }
-  });
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Campo de usuario
+  name: String,
+  repetition: Number,
+  serie: Number,
+  weight: Number,
+});
 
 const Exercise = mongoose.model('Exercise', exerciseSchema);
 

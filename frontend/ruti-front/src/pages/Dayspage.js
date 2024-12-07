@@ -290,7 +290,7 @@ function DayDetail() {
         </h1>
         <Dropdown>
           <Dropdown.Toggle variant="icon" id="dropdown-basic" className="custom-dropdown-toggle">
-            ⋮
+            ⋮ 
           </Dropdown.Toggle>
           <Dropdown.Menu>
             <Dropdown.Item onClick={() => setShowModal(true)}>Agregar ejercicio</Dropdown.Item>
