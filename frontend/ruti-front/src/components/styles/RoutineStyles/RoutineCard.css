@@ -1,25 +1,88 @@
+/* Estilos para el contenedor principal */
+.container {
+    margin-top: 2rem;
+    width: 100%;
+    padding: 0 1rem; 
+}
+
+/* Estilos para el título */
+h2 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #333;
+}
+
+/* Estilos para las tarjetas */
+.card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para el contenedor de contenido */
 .content-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    padding: 1rem;
 }
 
-.date-container {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-}
-
-.date-column {
-  flex: 1;
-}
-
+/* Estilos para el título de la tarjeta */
 .title {
-  align-items: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #007bff;
 }
 
+/* Estilos para el contenedor de fechas */
+.date-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Estilos para las columnas de fechas */
+.date-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilos para las etiquetas */
+.label {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+/* Estilos para las fechas */
+.date {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Estilos para el botón de agregar rutina */
+.card.mx-2:hover {
+    background-color: #f8f9fa;
+}
+
+/* Estilos para los iconos de navegación del carrusel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #007bff; /* Color de fondo */
+    border-radius: 50%; /* Bordes redondeados */   
+}
 
 .carousel-control-prev-icon:hover,
 .carousel-control-next-icon:hover {
-  background-color: #0056b3;
+    background-color: #0056b3; /* Color de fondo al pasar el ratón */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: auto; /* Ajusta el ancho del contenedor del icono */
 }

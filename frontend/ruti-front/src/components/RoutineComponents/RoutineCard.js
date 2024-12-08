@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/RoutineStyles/RoutineCard.css';
 import { format } from 'date-fns';
 
@@ -43,7 +42,7 @@ const Section = () => {
     const handleAddRoutine = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.post('http://localhost:3000/routine', {
+            const response = await axios.post('http://localhost:3000/routines', {
                 name: 'New Routine',
                 startDate: new Date(),
                 endDate: new Date()
@@ -112,3 +111,4 @@ const Section = () => {
 };
 
 export default Section;
+    

@@ -28,13 +28,6 @@
     margin: 0;
   }
   
-  .close-btn {
-    background: none;
-    border: none;
-    color: #ffffff;
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
   
   .sidebar-menu {
     list-style: none;
@@ -63,8 +56,8 @@
   
   .sidebar-toggle {
     position: fixed;
-    top: 1rem;
     right: 1rem; /* Cambia left a right */
+    top: 0.5rem;
     background: none;
     border: none;
     color: #ffffff;
@@ -72,4 +65,7 @@
     cursor: pointer;
     z-index: 1200; /* Asegúrate de que el botón esté por encima del sidebar */
   }
+
+
+
   

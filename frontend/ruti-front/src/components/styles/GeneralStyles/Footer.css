@@ -1,50 +1,48 @@
-/* src/components/Footer.css */
-
+/* Estilos para el Footer */
 .footer {
-    background-color: #4c9ced;
-    color: #ffffff;
-    padding: 1.5rem 0;
-    width: 100%;
+    background-color: #4c9ced; /* Color de fondo del Footer */
+    color: #ffffff; /* Color del texto */
+    padding: 2rem 0; /* Espaciado interno */
+    width: 100%; /* Ocupa todo el ancho de la página */
+    position: relative;
     bottom: 0;
 }
 
-.footer-column {
-    margin-bottom: 1rem;
+.footer-content {
+    max-width: 1200px; /* Ancho máximo del contenido */
+    margin: 0 auto; /* Centra el contenido horizontalmente */
+    padding: 0 1rem; /* Espaciado interno horizontal */
 }
 
-.title {
-    color: #4c9ced;
+.footer-section {
+    margin-bottom: 1rem; /* Espaciado inferior entre secciones */
+    text-align: center; /* Alinea el texto al centro */
+}
+
+.footer-title {
+    font-size: 1.5rem; /* Tamaño de fuente del título */
+    font-weight: bold; /* Negrita */
+    margin-bottom: 1rem; /* Espaciado inferior del título */
+    color: #ffffff; /* Color del texto */
 }
 
 .footer p {
-    margin: 0;
+    margin: 0; /* Sin margen */
+    color: #ffffff; /* Color del texto */
 }
 
-.footer-links {
-    display: flex;
-    gap: 1rem; /* Añade un espacio de 1rem entre cada enlace */
-    list-style: none; /* Elimina los puntos de la lista */
-    padding: 0; /* Elimina el padding por defecto */
-    margin: 0; /* Elimina el margen por defecto */
-  }
-  
-  .footer-links a {
-    color: #4c9ced;
-    text-decoration: none;
-    white-space: nowrap; /* Evita que el texto se envuelva en varias líneas */
-  }
-  
-  .footer-links a:hover {
-    text-decoration: underline;
-  }
-
+.footer-social {
+    display: flex; /* Utiliza flexbox para alinear los iconos */
+    justify-content: center; /* Centra los iconos horizontalmente */
+    gap: 1rem; /* Espaciado entre iconos */
+}
 
 .footer-social a {
-    color: #4c9ced;
-    font-size: 1.5rem;
-    margin-right: 1rem;
+    color: #ffffff; /* Color de los iconos */
+    font-size: 1.5rem; /* Tamaño de los iconos */
+    transition: color 0.3s ease; /* Transición suave para el color */
 }
 
 .footer-social a:hover {
-    color: black;
+    color: #ffcc00; /* Color de los iconos al pasar el ratón */
 }

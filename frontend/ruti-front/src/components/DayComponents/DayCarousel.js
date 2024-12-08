@@ -11,17 +11,24 @@ function DayCarousel({ routineId, onDayAdded, onAddDay }) {
   }, []);
 
   const fetchDays = async () => {
-    const response = await fetch('http://localhost:3000/days');
+    const token = localStorage.getItem('token');
+    const response = await fetch('http://localhost:3000/days', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
     const data = await response.json();
     setDays(data);
   };
 
   const handleAddDayToRoutine = async (dayId) => {
+    const token = localStorage.getItem('token');
     // Llamada a la API para añadir el día a la rutina
     await fetch('http://localhost:3000/routines/add-day', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({ routineId, dayId }),
     });

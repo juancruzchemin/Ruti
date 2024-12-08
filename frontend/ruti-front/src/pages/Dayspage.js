@@ -33,7 +33,12 @@ function DayDetail() {
 
   const fetchDay = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/days/${id}`);
+      const token = localStorage.getItem('token');
+      const response = await fetch(`http://localhost:3000/days/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       if (!response.ok) {
         throw new Error('Error fetching day data');
       }
@@ -48,7 +53,12 @@ function DayDetail() {
 
   const fetchDays = async () => {
     try {
-      const response = await fetch('http://localhost:3000/days');
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:3000/days', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       if (!response.ok) {
         throw new Error('Error fetching days data');
       }
@@ -61,8 +71,13 @@ function DayDetail() {
 
   const fetchExercises = async (exerciseIds) => {
     try {
+      const token = localStorage.getItem('token');
       const exercisePromises = exerciseIds.map(async (exerciseId) => {
-        const response = await fetch(`http://localhost:3000/exercises/${exerciseId}`);
+        const response = await fetch(`http://localhost:3000/exercises/${exerciseId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
         if (!response.ok) {
           throw new Error(`Error fetching exercise data for ID: ${exerciseId}`);
         }
@@ -87,11 +102,13 @@ function DayDetail() {
 
   const handleBlur = async (exercise, field) => {
     try {
+      const token = localStorage.getItem('token');
       // Actualizar el ejercicio en el backend
       const response = await fetch(`http://localhost:3000/exercises/${exercise._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ [field]: editedValues[field] }),
       });
@@ -122,11 +139,13 @@ function DayDetail() {
   const handleDeleteExercise = async (exerciseId) => {
     if (window.confirm('¿Está seguro de que desea eliminar este ejercicio?')) {
       try {
+        const token = localStorage.getItem('token');
         // Llamada a la API para eliminar el ejercicio del día
         const response = await fetch('http://localhost:3000/days/removeExerciseFromDay', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify({ dayId: id, exerciseId }),
         });
@@ -148,11 +167,13 @@ function DayDetail() {
 
   const handleAddExercise = async () => {
     try {
+      const token = localStorage.getItem('token');
       // Llamada a la API para crear un nuevo ejercicio
       const response = await fetch('http://localhost:3000/exercise', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(newExercise),
       });
@@ -168,6 +189,7 @@ function DayDetail() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ dayId: id, exerciseId: createdExercise._id }),
       });
@@ -190,11 +212,13 @@ function DayDetail() {
 
   const handleEditDayName = async () => {
     try {
+      const token = localStorage.getItem('token');
       // Llamada a la API para actualizar el nombre del día
       const response = await fetch(`http://localhost:3000/days/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ name: newDayName }),
       });
@@ -215,11 +239,13 @@ function DayDetail() {
   const handleDeleteDay = async () => {
     if (window.confirm('¿Está seguro de que desea eliminar este día?')) {
       try {
+        const token = localStorage.getItem('token');
         // Llamada a la API para eliminar el día
         const response = await fetch(`http://localhost:3000/days/${id}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           },
         });
 
@@ -241,11 +267,13 @@ function DayDetail() {
 
   const handleAddDay = async () => {
     try {
+      const token = localStorage.getItem('token');
       // Llamada a la API para crear un nuevo día
       const response = await fetch('http://localhost:3000/day', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(newDay),
       });

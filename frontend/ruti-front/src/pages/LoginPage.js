@@ -60,11 +60,15 @@ function LoginPage() {
           <button type="submit" className="button">Iniciar sesión</button>
         </form>
         {message && <p className="message">{message}</p>}
-        <a href="http://localhost:3000/auth/google" className="button">Iniciar sesión con Google</a>
-        <a href="/signup" className="button">Registrarse</a>
+        <div className="button-group">
+          <a href="http://localhost:3000/auth/google" className="button">Iniciar sesión con Google</a>
+          <a href="/signup" className="button">Registrarse</a>
+        </div>
       </header>
     </div>
   );
 }
 
+
 export default LoginPage;
+

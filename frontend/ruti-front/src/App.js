@@ -11,20 +11,23 @@ import Footer from './components/GeneralComponents/Footer';
 import SignUp from './pages/SignUpPage';
 import Login from './pages/LoginPage';
 import ProtectedRoute from './ProtectedRoute';
+import './styles/GeneralStyles/App.css'; // Importa el archivo de estilos
 
 function App() {
   return (
-    <div>
+    <div className="app-container">
       <SideBar />
       <Header />
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/" element={<ProtectedRoute element={HomePage} />} />
-        <Route path="/routines/:id" element={<ProtectedRoute element={RoutineDetail} />} />
-        <Route path="/days/:id" element={<ProtectedRoute element={DayDetail} />} />
-        <Route path="/exercises/:id" element={<ProtectedRoute element={ExerciseDetails} />} />
-      </Routes>
+      <div className="content">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<ProtectedRoute element={HomePage} />} />
+          <Route path="/routines/:id" element={<ProtectedRoute element={RoutineDetail} />} />
+          <Route path="/days/:id" element={<ProtectedRoute element={DayDetail} />} />
+          <Route path="/exercises/:id" element={<ProtectedRoute element={ExerciseDetails} />} />
+        </Routes>
+      </div>
       <Footer />
     </div>
   );

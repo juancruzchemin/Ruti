@@ -18,7 +18,12 @@ function RoutineDetail() {
   const [newExercise, setNewExercise] = useState({ name: '', repetition: '', serie: '', weight: '' });
 
   const fetchRoutine = async () => {
-    const response = await fetch(`http://localhost:3000/routines/${id}`);
+    const token = localStorage.getItem('token');
+    const response = await fetch(`http://localhost:3000/routines/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
     const data = await response.json();
     setRoutine(data);
   };
@@ -67,11 +72,13 @@ function RoutineDetail() {
   const handleDeleteDay = async (dayId) => {
     if (window.confirm('¿Está seguro de que desea eliminar este día?')) {
       try {
+        const token = localStorage.getItem('token');
         // Llamada a la API para eliminar el día de la rutina
         const response = await fetch('http://localhost:3000/routines/removeDayFromRoutine', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify({ routineId: id, dayId: dayId }),
         });
@@ -95,11 +102,13 @@ function RoutineDetail() {
   const handleSubmitNewDay = async (e) => {
     e.preventDefault();
     try {
+      const token = localStorage.getItem('token');
       // Llamada a la API para crear un nuevo día
       const response = await fetch('http://localhost:3000/day', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(newDay),
       });
@@ -115,6 +124,7 @@ function RoutineDetail() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ routineId: id, dayId: createdDay._id }),
       });
@@ -140,11 +150,13 @@ function RoutineDetail() {
 
   const handleSubmitNewExercise = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem('token');
     // Llamada a la API para crear un nuevo ejercicio
     const response = await fetch('http://localhost:3000/exercise', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(newExercise),
     });
@@ -155,6 +167,7 @@ function RoutineDetail() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({ dayId: selectedDayId, exerciseId: createdExercise.exercise._id }),
     });
@@ -171,11 +184,13 @@ function RoutineDetail() {
 
   const handleSubmitEditDay = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem('token');
     // Llamada a la API para actualizar el día
     const response = await fetch(`http://localhost:3000/days/${selectedDayId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(newDay),
     });

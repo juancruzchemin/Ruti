@@ -17,9 +17,6 @@ const Sidebar = () => {
       <div className={`sidebar ${isOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
           <h3>Ruti</h3>
-          <button className="close-btn" onClick={toggleSidebar}>
-            &times;
-          </button>
         </div>
         <ul className="sidebar-menu">
           <li>

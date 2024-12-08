@@ -3,7 +3,7 @@ import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/ExerciseStyles/ExerciseCard.css'
+import '../styles/ExerciseStyles/ExerciseCard.css';
 
 const ExerciseCard = () => {
     const [exercises, setExercises] = useState([]);
@@ -12,7 +12,12 @@ const ExerciseCard = () => {
         // Función para obtener los ejercicios
         const fetchExercises = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/exercises');
+                const token = localStorage.getItem('token');
+                const response = await axios.get('http://localhost:3000/exercises', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
                 setExercises(response.data); // Guardamos los datos en el estado
             } catch (error) {
                 console.error("Error fetching exercises:", error);
@@ -33,7 +38,6 @@ const ExerciseCard = () => {
     };
 
     const exerciseChunks = exercises.reduce(reduceExercises, []);
-
 
     return (
         <div className="container my-4">

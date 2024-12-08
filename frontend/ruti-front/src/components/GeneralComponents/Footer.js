@@ -1,20 +1,20 @@
-// src/components/Footer.js
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 import '../styles/GeneralStyles/Footer.css'; // Importa el archivo de estilos
 
 const Footer = () => {
   return (
     <footer className="footer">
-      <Container>
-        <Row>
-          <Col md={8} className="footer-column">
-            <h5 className='title'>Ruti</h5>
-            <p>Tu aplicación de fitness y bienestar.</p>
+      <div className="footer-content">
+        <Row className="justify-content-center align-items-center">
+          <Col md={6} className="footer-section about text-center">
+            <h1 className="footer-title">Ruti</h1>
+            <p>Your fitness and wellness app.</p>
+            <p>&copy; {new Date().getFullYear()} Ruti. All rights reserved.</p>
           </Col>
-          <Col md={4} className="footer-column follow">
-            <h5 className='title'>Síguenos</h5>
+          <Col md={6} className="footer-section social text-center">
+            <h1 className="footer-title">Follow us</h1>
             <div className="footer-social">
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
@@ -22,12 +22,7 @@ const Footer = () => {
             </div>
           </Col>
         </Row>
-        <Row>
-          <Col className="text-center">
-            <p>&copy; {new Date().getFullYear()} Ruti. Todos los derechos reservados.</p>
-          </Col>
-        </Row>
-      </Container>
+      </div>
     </footer>
   );
 };

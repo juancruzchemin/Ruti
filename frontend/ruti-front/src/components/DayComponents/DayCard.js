@@ -3,7 +3,7 @@ import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/DayStyles/DayCard.css'
+import '../styles/DayStyles/DayCard.css';
 
 const DayCard = () => {
     const [days, setDays] = useState([]);
@@ -12,7 +12,12 @@ const DayCard = () => {
         // Función para obtener los días
         const fetchDays = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/days');
+                const token = localStorage.getItem('token');
+                const response = await axios.get('http://localhost:3000/days', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
                 setDays(response.data); // Guardamos los datos en el estado
             } catch (error) {
                 console.error("Error fetching days:", error);

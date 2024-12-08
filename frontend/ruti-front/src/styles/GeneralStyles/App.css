@@ -1,0 +1,19 @@
+/* Estilos para el contenedor de la aplicación */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Estilos para el contenido principal */
+.content {
+    flex: 1;
+}
+
+/* Estilos para el Footer */
+.footer {
+    padding: 2rem 0; /* Espaciado interno */
+    width: 100%; /* Ocupa todo el ancho de la página */
+    position: relative;
+    bottom: 0;
+}
