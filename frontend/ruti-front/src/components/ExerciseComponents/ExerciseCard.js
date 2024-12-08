@@ -41,7 +41,8 @@ const ExerciseCard = () => {
 
     return (
         <div className="container my-4">
-            <h2>Exercises</h2>
+                <h2>Exercises</h2>
+                <a href="/all-exercises" className="view-all-link">View all</a>           
             <Carousel interval={null} indicators={false}>
                 {exerciseChunks.map((chunk, index) => (
                     <Carousel.Item key={index}>

@@ -13,7 +13,12 @@ const DayCard = ({ onAddDayClick }) => {
         // Función para obtener los días
         const fetchDays = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/days');
+                const token = localStorage.getItem('token'); // Obtener el token de autenticación
+                const response = await axios.get('http://localhost:3000/days', {
+                    headers: {
+                        'Authorization': `Bearer ${token}` // Incluir el token de autenticación en los encabezados
+                    }
+                });
                 setDays(response.data); // Guardamos los datos en el estado
             } catch (error) {
                 console.error("Error fetching days:", error);

@@ -1,0 +1,153 @@
+.all-days-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.all-days-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.all-days-title {
+  color: #333;
+}
+
+.all-days-add-button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.all-days-add-button:hover {
+  background-color: #0056b3;
+}
+
+.all-days-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.all-days-item {
+  background-color: #fff;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.all-days-info h3 {
+  margin: 0 0 10px;
+  color: #007bff;
+}
+
+.all-days-info p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.loading,
+.error {
+  text-align: center;
+  color: #777;
+  font-size: 18px;
+}
+
+.error {
+  color: red;
+}
+
+.all-days-edit-form,
+.all-days-create-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.all-days-input {
+  display: block;
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.all-days-create-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.all-days-save-button,
+.all-days-cancel-button,
+.all-days-delete-button {
+  padding: 10px 15px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.all-days-save-button {
+  background-color: #007bff;
+}
+
+.all-days-save-button:hover {
+  background-color: #0056b3;
+}
+
+.all-days-cancel-button {
+  background-color: #dc3545;
+}
+
+.all-days-cancel-button:hover {
+  background-color: #c82333;
+}
+
+.all-days-menu {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.custom-dropdown-toggle {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.custom-dropdown-toggle::after {
+  display: none;
+}
+
+.all-days-exercises-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.all-days-exercise-item {
+  margin-bottom: 5px;
+}
+
+.all-days-details-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.all-days-details-button:hover {
+  background-color: #0056b3;
+}

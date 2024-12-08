@@ -4,6 +4,9 @@ import HomePage from './pages/Homepage';
 import RoutineDetail from './pages/Routinepage';
 import DayDetail from './pages/Dayspage';
 import ExerciseDetails from './pages/Exercisepage';
+import AllExercises from './pages/AllExercisePage';
+import AllRoutines from './pages/AllRoutinesPage';
+import AllDays from './pages/AllDaysPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SideBar from './components/GeneralComponents/SideBar';
 import Header from './components/GeneralComponents/Header';
@@ -26,6 +29,9 @@ function App() {
           <Route path="/routines/:id" element={<ProtectedRoute element={RoutineDetail} />} />
           <Route path="/days/:id" element={<ProtectedRoute element={DayDetail} />} />
           <Route path="/exercises/:id" element={<ProtectedRoute element={ExerciseDetails} />} />
+          <Route path="/all-exercises" element={<ProtectedRoute element={AllExercises} />} />
+          <Route path="/all-routines"element={<ProtectedRoute element={AllRoutines} />} /> 
+          <Route path="/all-days"element={<ProtectedRoute element={AllDays} />} /> 
         </Routes>
       </div>
       <Footer />

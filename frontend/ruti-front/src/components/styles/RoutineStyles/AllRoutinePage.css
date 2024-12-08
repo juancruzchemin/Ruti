@@ -1,0 +1,131 @@
+.all-routines-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .all-routines-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .all-routines-title {
+    color: #333;
+  }
+  
+  .all-routines-add-button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .all-routines-add-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .all-routines-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .all-routines-item {
+    background-color: #fff;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .all-routines-info h3 {
+    margin: 0 0 10px;
+    color: #007bff;
+  }
+  
+  .all-routines-info p {
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  .loading,
+  .error {
+    text-align: center;
+    color: #777;
+    font-size: 18px;
+  }
+  
+  .error {
+    color: red;
+  }
+  
+  .all-routines-edit-form,
+  .all-routines-create-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .all-routines-input {
+    display: block;
+    margin-bottom: 10px;
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .all-routines-create-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .all-routines-save-button,
+  .all-routines-cancel-button,
+  .all-routines-delete-button {
+    padding: 10px 15px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .all-routines-save-button {
+    background-color: #007bff;
+  }
+  
+  .all-routines-save-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .all-routines-cancel-button {
+    background-color: #dc3545;
+  }
+  
+  .all-routines-cancel-button:hover {
+    background-color: #c82333;
+  }
+  
+  .all-routines-menu {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .custom-dropdown-toggle {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .custom-dropdown-toggle::after {
+    display: none;
+  }
+  

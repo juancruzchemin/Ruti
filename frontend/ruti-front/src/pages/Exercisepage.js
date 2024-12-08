@@ -13,21 +13,28 @@ function ExerciseDetails() {
   const [editingFields, setEditingFields] = useState({});
   const inputRefs = useRef({});
 
-
   useEffect(() => {
     if (id) {
       // Llamada a la API para obtener el ejercicio por su ID
-      fetch(`http://localhost:3000/exercises/${id}`)
-        .then(response => {
+      const fetchExercise = async () => {
+        try {
+          const token = localStorage.getItem('token');
+          const response = await fetch(`http://localhost:3000/exercises/${id}`, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }
-          return response.json();
-        })
-        .then(data => {
+          const data = await response.json();
           setSelectedExercise(data);
-        })
-        .catch(error => console.error('Error:', error));
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+
+      fetchExercise();
     }
   }, [id]);
 
@@ -56,11 +63,13 @@ function ExerciseDetails() {
 
   const handleBlur = async (field) => {
     try {
+      const token = localStorage.getItem('token');
       // Actualizar el ejercicio en el backend
       const response = await fetch(`http://localhost:3000/exercises/${selectedExercise._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ [field]: editedValues[field] }),
       });
@@ -88,11 +97,13 @@ function ExerciseDetails() {
 
   const handleAddExercise = async () => {
     try {
+      const token = localStorage.getItem('token');
       // Llamada a la API para crear un nuevo ejercicio
       const response = await fetch('http://localhost:3000/exercises', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(newExercise),
       });
@@ -116,11 +127,13 @@ function ExerciseDetails() {
   const handleDeleteExercise = async () => {
     if (window.confirm('¿Está seguro de que desea eliminar este ejercicio?')) {
       try {
+        const token = localStorage.getItem('token');
         // Llamada a la API para eliminar el ejercicio
         const response = await fetch(`http://localhost:3000/exercises/${selectedExercise._id}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           },
         });
 

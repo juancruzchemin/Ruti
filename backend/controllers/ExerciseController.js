@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Exercise = require('../models/ExerciseModel');
 const Day = require('../models/DayModel');
 
@@ -41,20 +42,38 @@ const getAllExercises = async (req, res) => {
 
 const getExercise = async (req, res) => {
   const userId = req.user._id; // Suponiendo que el usuario está disponible en req.user
-  const exercise = await Exercise.findOne({ _id: req.params.id, user: userId });
+  const exerciseId = req.params.id;
 
-  if (!exercise) {
-    return res.status(404).json({ message: 'Ejercicio no encontrado' });
+  // Verifica si el ID es un ObjectId válido
+  if (!mongoose.Types.ObjectId.isValid(exerciseId)) {
+    return res.status(400).json({ message: 'ID de ejercicio no válido' });
   }
 
-  res.json(exercise);
+  try {
+    const exercise = await Exercise.findOne({ _id: exerciseId, user: userId });
+
+    if (!exercise) {
+      return res.status(404).json({ message: 'Ejercicio no encontrado' });
+    }
+
+    res.json(exercise);
+  } catch (error) {
+    console.error('Error al obtener el ejercicio:', error);
+    res.status(500).json({ message: 'Error interno del servidor', error: error.message });
+  }
 };
 
 const updateExercise = async (req, res) => {
   const userId = req.user._id; // Suponiendo que el usuario está disponible en req.user
+  const exerciseId = req.params.id;
+
+  // Verifica si el ID es un ObjectId válido
+  if (!mongoose.Types.ObjectId.isValid(exerciseId)) {
+    return res.status(400).json({ message: 'ID de ejercicio no válido' });
+  }
 
   try {
-    const exercise = await Exercise.findOneAndUpdate({ _id: req.params.id, user: userId }, req.body, { new: true });
+    const exercise = await Exercise.findOneAndUpdate({ _id: exerciseId, user: userId }, req.body, { new: true });
     if (!exercise) {
       return res.status(404).json({ message: 'Ejercicio no encontrado' });
     }
@@ -67,7 +86,12 @@ const updateExercise = async (req, res) => {
 
 const deleteExercise = async (req, res) => {
   const userId = req.user._id; // Suponiendo que el usuario está disponible en req.user
-  const { exerciseId } = req.params;
+  const exerciseId = req.params.id;
+
+  // Verifica si el ID es un ObjectId válido
+  if (!mongoose.Types.ObjectId.isValid(exerciseId)) {
+    return res.status(400).json({ message: 'ID de ejercicio no válido' });
+  }
 
   try {
     // Eliminar el ejercicio de la colección de ejercicios
@@ -94,6 +118,11 @@ const deleteExercise = async (req, res) => {
 const addExerciseToDay = async (req, res) => {
   const { dayId, exerciseId } = req.body;
   const userId = req.user._id; // Suponiendo que el usuario está disponible en req.user
+
+  // Verifica si los IDs son ObjectId válidos
+  if (!mongoose.Types.ObjectId.isValid(dayId) || !mongoose.Types.ObjectId.isValid(exerciseId)) {
+    return res.status(400).json({ message: 'ID de día o ejercicio no válido' });
+  }
 
   try {
     const day = await Day.findOne({ _id: dayId, user: userId });
@@ -122,6 +151,11 @@ const addExerciseToDay = async (req, res) => {
 const removeExerciseFromDay = async (req, res) => {
   const { dayId, exerciseId } = req.body;
   const userId = req.user._id; // Suponiendo que el usuario está disponible en req.user
+
+  // Verifica si los IDs son ObjectId válidos
+  if (!mongoose.Types.ObjectId.isValid(dayId) || !mongoose.Types.ObjectId.isValid(exerciseId)) {
+    return res.status(400).json({ message: 'ID de día o ejercicio no válido' });
+  }
 
   try {
     const day = await Day.findOne({ _id: dayId, user: userId });

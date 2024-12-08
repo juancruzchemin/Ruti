@@ -42,6 +42,7 @@ const DayCard = () => {
     return (
         <div className="container my-4">
             <h2>Days</h2>
+            <a href="/all-days" className="view-all-link">View all</a> 
             <Carousel interval={null} indicators={false}>
                 {exerciseChunks.map((chunk, index) => (
                     <Carousel.Item key={index}>

@@ -19,11 +19,14 @@ function DayCard({ day, onAddExercise, onEditDay, onDeleteDay }) {
 
   const handleBlur = async (exercise, field) => {
     try {
+      const token = localStorage.getItem('token'); // Obtener el token de autenticación
+
       // Actualizar el ejercicio en el backend
       const response = await fetch(`http://localhost:3000/exercises/${exercise._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` // Incluir el token de autenticación en los encabezados
         },
         body: JSON.stringify({ [field]: editedValues[field] }),
       });
@@ -35,7 +38,7 @@ function DayCard({ day, onAddExercise, onEditDay, onDeleteDay }) {
       const updatedExercise = await response.json();
 
       // Actualizar el ejercicio en el estado local
-      exercise[field] = updatedExercise[field];
+      setExercises(exercises.map(ex => ex._id === exercise._id ? updatedExercise : ex));
       setEditingExercise(null);
     } catch (error) {
       console.error('Error updating exercise:', error);
@@ -51,11 +54,14 @@ function DayCard({ day, onAddExercise, onEditDay, onDeleteDay }) {
 
   const handleDeleteExercise = async (exerciseId) => {
     try {
+      const token = localStorage.getItem('token'); // Obtener el token de autenticación
+
       // Llamada a la API para eliminar el ejercicio del día
       const response = await fetch('http://localhost:3000/days/removeExerciseFromDay', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` // Incluir el token de autenticación en los encabezados
         },
         body: JSON.stringify({ dayId: day._id, exerciseId }),
       });

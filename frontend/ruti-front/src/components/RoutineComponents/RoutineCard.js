@@ -60,6 +60,7 @@ const Section = () => {
     return (
         <div className="container my-4">
             <h2>Routines</h2>
+            <a href="/all-routines" className="view-all-link">View all</a>           
             <Carousel interval={null} indicators={false}>
                 {routineChunks.map((chunk, index) => (
                     <Carousel.Item key={index}>

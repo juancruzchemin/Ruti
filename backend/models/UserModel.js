@@ -6,7 +6,10 @@ const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    googleId: { type: String, unique: true, sparse: true } // Campo para almacenar el ID de Google
+    googleId: { type: String, unique: true, sparse: true }, // Campo para almacenar el ID de Google
+    routines: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Routine' }], // Referencias a rutinas
+    days: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Day' }], // Referencias a días
+    exercises: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' }] // Referencias a ejercicios
 });
 
 // Pre-hook para encriptar la contraseña antes de guardar
