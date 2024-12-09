@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import RoutineHeader from '../components/RoutineComponents/RoutineHeader';
 import DayRoutineCard from '../components/DayComponents/DayRoutineCard';
 import DayCarousel from '../components/DayComponents/DayCarousel';
@@ -8,6 +8,7 @@ import '../components/styles/RoutineStyles/Routinepage.css';
 
 function RoutineDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [routine, setRoutine] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedDayId, setSelectedDayId] = useState(null);
@@ -16,6 +17,7 @@ function RoutineDetail() {
   const [isEditing, setIsEditing] = useState(false);
   const [newDay, setNewDay] = useState({ name: '' });
   const [newExercise, setNewExercise] = useState({ name: '', repetition: '', serie: '', weight: '' });
+  const [editRoutineData, setEditRoutineData] = useState({ name: '', startDate: '', endDate: '' });
 
   const fetchRoutine = async () => {
     const token = localStorage.getItem('token');
@@ -220,12 +222,59 @@ function RoutineDetail() {
 
   const onEditRoutine = (routineId) => {
     // Implementa la lógica para editar la rutina
-    console.log(`Editar rutina con ID: ${routineId}`);
+    const routineToEdit = routine;
+    setEditRoutineData({
+      name: routineToEdit.name,
+      startDate: routineToEdit.startDate.split('T')[0],
+      endDate: routineToEdit.endDate.split('T')[0]
+    });
+    setIsEditing(true);
+    setModalIsOpen(true);
   };
 
-  const onDeleteRoutine = (routineId) => {
-    // Implementa la lógica para eliminar la rutina
-    console.log(`Eliminar rutina con ID: ${routineId}`);
+  const handleSubmitEditRoutine = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+    // Llamada a la API para actualizar la rutina
+    const response = await fetch(`http://localhost:3000/routines/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(editRoutineData),
+    });
+    const updatedRoutine = await response.json();
+
+    // Actualizar el estado de la rutina
+    setRoutine(updatedRoutine);
+
+    closeModal();
+  };
+
+  const onDeleteRoutine = async (routineId) => {
+    if (window.confirm('¿Está seguro de que desea eliminar esta rutina?')) {
+      try {
+        const token = localStorage.getItem('token');
+        // Llamada a la API para eliminar la rutina
+        const response = await fetch(`http://localhost:3000/routines/${routineId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Error deleting routine');
+        }
+
+        // Redirigir a la página de todas las rutinas después de eliminar
+        navigate('/all-routines');
+      } catch (error) {
+        console.error('Error deleting routine:', error);
+        alert('Error deleting routine');
+      }
+    }
   };
 
   if (!routine) return <div>Cargando...</div>;
@@ -268,9 +317,12 @@ function RoutineDetail() {
         handleSubmitNewDay={handleSubmitNewDay}
         handleSubmitNewExercise={handleSubmitNewExercise}
         handleSubmitEditDay={handleSubmitEditDay}
+        handleSubmitEditRoutine={handleSubmitEditRoutine}
         fetchRoutine={fetchRoutine}
         setNewDay={setNewDay}
         setNewExercise={setNewExercise}
+        editRoutineData={editRoutineData}
+        setEditRoutineData={setEditRoutineData}
       />
     </div>
   );

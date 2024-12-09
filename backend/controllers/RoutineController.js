@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken'); // Para generar un token
 const createRoutine = async (req, res) => {
     try {
         const { name, startDate, endDate } = req.body;
-        const userId = req.user._id; // Asumiendo que el usuario está disponible en req.user
+        const userId = req.user._id; // Suponiendo que el usuario está disponible en req.user
 
         // Crear una nueva rutina
         const newRoutine = new Routine({
@@ -48,13 +48,14 @@ const getRoutine = async (req, res) => {
 
 const getAllRoutines = async (req, res) => {
     try {
-        const routines = await Routine.find()
+        const userId = req.user._id; // Suponiendo que el usuario está disponible en req.user
+        const routines = await Routine.find({ user: userId })
             .populate({
                 path: 'days',
                 populate: {
                     path: 'exercises'
                 }
-            }); // Devuelve todas las rutinas con días y ejercicios poblados
+            }); // Devuelve todas las rutinas del usuario con días y ejercicios poblados
         res.status(200).json(routines); // Devuelve las rutinas en formato JSON
     } catch (err) {
         res.status(500).json({ message: 'Error al obtener las rutinas', error: err });

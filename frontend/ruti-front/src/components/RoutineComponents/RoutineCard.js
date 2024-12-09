@@ -42,7 +42,7 @@ const Section = () => {
     const handleAddRoutine = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.post('http://localhost:3000/routines', {
+            const response = await axios.post('http://localhost:3000/routine', {
                 name: 'New Routine',
                 startDate: new Date(),
                 endDate: new Date()
@@ -51,7 +51,7 @@ const Section = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            setRoutines([...routines, response.data]);
+            setRoutines([...routines, response.data.routine]);
         } catch (error) {
             console.error("Error creating routine:", error);
         }
@@ -112,4 +112,3 @@ const Section = () => {
 };
 
 export default Section;
-    
